@@ -21,6 +21,8 @@ type AuthFileStatusResponse = { status: string; disabled: boolean };
 export type AuthFileLookup = { name: string; authIndex?: string };
 type AuthFileEntry = AuthFilesResponse['files'][number];
 export type AuthFileFieldsPatch = {
+  /** Claude usage guardrails: minimum remaining percent per window; null clears. */
+  quota_reserve?: Partial<Record<'five_hour' | 'seven_day' | 'seven_day_fable', number>> | null;
   request_retry?: number | null;
   model_aliases?: Array<{
     name: string;

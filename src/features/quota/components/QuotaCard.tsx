@@ -22,6 +22,12 @@ import { useClaudeResetGrants } from '../providers/claude/ClaudeResetGrants';
 import { ClaudeResetGrantDialog } from '../providers/claude/ClaudeResetGrantDialog';
 import { ClaudeResetGrantDetails } from '../providers/claude/ClaudeResetGrantDetails';
 import { hasClaudeUsageData } from '../providers/claude/data';
+import {
+  ClaudeQuotaReserveDialog,
+  ClaudeQuotaReserveRow,
+} from '../providers/claude/ClaudeQuotaReserve';
+import { useClaudeQuotaReserve } from '../providers/claude/useClaudeQuotaReserve';
+import { claudeQuotaReserveMarkers } from '../providers/claude/quotaReserve';
 import { CodexCreditOverageDialog } from '../providers/codex/CodexCreditOverageDialog';
 import { CodexCreditOverageRow } from '../providers/codex/CodexCreditOverageRow';
 import { useCodexCreditOverage } from '../providers/codex/useCodexCreditOverage';
@@ -49,6 +55,8 @@ export type QuotaCardProps = {
   creditOverageSharedCount?: number;
   onRefresh: () => void;
   onReset: () => void;
+  /** Reload credential listings after a credential setting changes. */
+  onCredentialChanged?: () => void | Promise<void>;
 };
 
 export function QuotaCard(props: QuotaCardProps) {
@@ -64,6 +72,7 @@ export function QuotaCard(props: QuotaCardProps) {
     creditOverageSharedCount = 1,
     onRefresh,
     onReset,
+    onCredentialChanged,
   } = props;
   const { t } = useTranslation();
   const adapter = QUOTA_ADAPTERS[entry.type];
@@ -109,16 +118,31 @@ export function QuotaCard(props: QuotaCardProps) {
       <span className={quotaClasses.codexPlanValue}>{claudeReset.count ?? '--'}</span>
     </span>
   ) : undefined;
-  const claudeAfterPlan = showClaudeReset ? (
-    <>
-      <ClaudeResetGrantDetails grants={claudeReset.grants} classes={quotaClasses} />
-      {claudeReset.message && (
-        <div role="status" className={quotaClasses.codexResetCreditsError}>
-          {t(`claude_reset.${claudeReset.message}`)}
-        </div>
-      )}
-    </>
-  ) : undefined;
+  const quotaReserve = useClaudeQuotaReserve(file, onCredentialChanged);
+  const claudeReserveMarkers =
+    entry.type === 'claude' ? claudeQuotaReserveMarkers(quotaReserve.reserve) : undefined;
+  const claudeAfterPlan =
+    entry.type === 'claude' ? (
+      <>
+        {showClaudeReset && (
+          <>
+            <ClaudeResetGrantDetails grants={claudeReset.grants} classes={quotaClasses} />
+            {claudeReset.message && (
+              <div role="status" className={quotaClasses.codexResetCreditsError}>
+                {t(`claude_reset.${claudeReset.message}`)}
+              </div>
+            )}
+          </>
+        )}
+        <ClaudeQuotaReserveRow
+          configured={Object.keys(quotaReserve.reserve).length > 0}
+          classes={quotaClasses}
+          disabled={quotaReserve.saving}
+          name={displayName}
+          onManage={quotaReserve.openDialog}
+        />
+      </>
+    ) : undefined;
   const creditOverage = useCodexCreditOverage(
     file,
     entry.type === 'codex' ? (quota as CodexQuotaState | undefined) : undefined,
@@ -211,6 +235,7 @@ export function QuotaCard(props: QuotaCardProps) {
             classes={quotaClasses}
             planItems={claudePlanItems}
             afterPlan={entry.type === 'codex' ? codexAfterPlan : claudeAfterPlan}
+            reserveMarkers={claudeReserveMarkers}
           />
         ) : !retainedClaudeUsage ? (
           <div className={styles.idleHint}>{t(`${adapter.i18nPrefix}.idle`)}</div>
@@ -226,6 +251,7 @@ export function QuotaCard(props: QuotaCardProps) {
             classes={quotaClasses}
             planItems={claudePlanItems}
             afterPlan={claudeAfterPlan}
+            reserveMarkers={claudeReserveMarkers}
           />
         )}
       </div>
@@ -283,6 +309,19 @@ export function QuotaCard(props: QuotaCardProps) {
           name={displayName}
           onConfirm={() => void claudeReset.confirm()}
           onClose={claudeReset.closeDialog}
+        />
+      )}
+      {entry.type === 'claude' && (
+        <ClaudeQuotaReserveDialog
+          open={quotaReserve.open}
+          name={displayName}
+          draft={quotaReserve.draft}
+          invalid={quotaReserve.invalid}
+          error={quotaReserve.error}
+          saving={quotaReserve.saving}
+          onChange={quotaReserve.updateDraft}
+          onSave={() => void quotaReserve.save()}
+          onClose={quotaReserve.closeDialog}
         />
       )}
       {creditOverage.context && (

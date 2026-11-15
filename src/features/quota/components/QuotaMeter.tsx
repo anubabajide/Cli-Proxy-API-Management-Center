@@ -16,9 +16,18 @@ export interface QuotaMeterProps {
   percent: number | null;
   classes: QuotaClassMap;
   index?: number;
+  /** Remaining percentage where a configured guardrail pauses the credential. */
+  markerPercent?: number;
+  markerLabel?: string;
 }
 
-export function QuotaMeter({ percent, classes, index }: QuotaMeterProps) {
+export function QuotaMeter({
+  percent,
+  classes,
+  index,
+  markerPercent,
+  markerLabel,
+}: QuotaMeterProps) {
   const clamp = (value: number, min: number, max: number) => Math.min(max, Math.max(min, value));
   const normalized = percent === null ? null : clamp(percent, 0, 100);
   const fillClass =
@@ -38,6 +47,15 @@ export function QuotaMeter({ percent, classes, index }: QuotaMeterProps) {
   return (
     <div className={classes.quotaBar}>
       <div className={`${classes.quotaBarFill} ${fillClass}`} style={style} />
+      {markerPercent !== undefined && (
+        <span
+          className={classes.quotaBarMarker}
+          style={{ left: `${clamp(markerPercent, 0, 100)}%` }}
+          role="img"
+          aria-label={markerLabel}
+          title={markerLabel}
+        />
+      )}
     </div>
   );
 }

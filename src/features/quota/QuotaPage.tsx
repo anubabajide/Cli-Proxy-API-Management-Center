@@ -376,6 +376,7 @@ export function QuotaPage() {
         onToggleGlance={() => toggleExpandedCard(key)}
         onRefresh={() => void refreshQuota(entry.file, QUOTA_ADAPTERS[entry.type])}
         onReset={() => resetQuota(entry.file, QUOTA_ADAPTERS[entry.type])}
+        onCredentialChanged={loadFiles}
       />
     );
   };

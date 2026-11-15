@@ -530,7 +530,21 @@
     "plan_max": "Max",
     "plan_max5": "Max 5x",
     "plan_max20": "Max 20x",
-    "plan_team": "Team"
+    "plan_team": "Team",
+    "reserve_label": "사용량 가드레일",
+    "reserve_state_on": "켜짐",
+    "reserve_state_off": "꺼짐",
+    "reserve_manage": "설정",
+    "reserve_manage_aria": "\"{{name}}\"의 사용량 가드레일 설정",
+    "reserve_dialog_title": "사용량 가드레일",
+    "reserve_intro": "한도의 남은 할당량이 아래 비율까지 떨어지면 이 자격 증명으로 요청을 보내지 않습니다. 해당 한도가 재설정되면 다시 사용합니다.",
+    "reserve_placeholder": "꺼짐",
+    "reserve_invalid": "0~99 사이의 숫자를 입력하거나 비워 두세요.",
+    "reserve_fable_hint": "Fable 요청에만 적용됩니다.",
+    "reserve_scope_note": "비워 두거나 0으로 설정하면 꺼집니다. 사용량은 약 2분마다 확인되므로 잠시 가드레일을 넘을 수 있습니다.",
+    "reserve_saved": "\"{{name}}\"의 사용량 가드레일을 저장했습니다",
+    "reserve_marker": "가드레일: {{percent}}% 남으면 일시 중지",
+    "reserve_reached": "일시 중지됨"
   },
   "codex_quota": {
     "title": "Codex 할당량",

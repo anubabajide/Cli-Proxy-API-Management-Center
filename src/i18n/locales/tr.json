@@ -530,7 +530,21 @@
     "plan_max": "Max",
     "plan_max5": "Max 5x",
     "plan_max20": "Max 20x",
-    "plan_team": "Team"
+    "plan_team": "Team",
+    "reserve_label": "Kullanım koruması",
+    "reserve_state_on": "Açık",
+    "reserve_state_off": "Kapalı",
+    "reserve_manage": "Yapılandır",
+    "reserve_manage_aria": "\"{{name}}\" için kullanım korumasını yapılandır",
+    "reserve_dialog_title": "Kullanım koruması",
+    "reserve_intro": "Bir limitin kalan kotası aşağıdaki yüzdeye düştüğünde bu kimlik bilgisine istek yönlendirmeyi durdurur. Limit sıfırlandığında yönlendirme devam eder.",
+    "reserve_placeholder": "Kapalı",
+    "reserve_invalid": "0 ile 99 arasında bir sayı girin veya boş bırakın.",
+    "reserve_fable_hint": "Yalnızca Fable isteklerine uygulanır.",
+    "reserve_scope_note": "Kapatmak için boş bırakın veya 0 girin. Kullanım yaklaşık 2 dakikada bir kontrol edildiğinden kimlik bilgisi korumayı kısa süre aşabilir.",
+    "reserve_saved": "\"{{name}}\" için kullanım koruması kaydedildi",
+    "reserve_marker": "Koruma: %{{percent}} kaldığında duraklar",
+    "reserve_reached": "Duraklatıldı"
   },
   "codex_quota": {
     "title": "Codex Kotası",
