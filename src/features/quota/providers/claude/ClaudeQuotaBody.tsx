@@ -12,12 +12,14 @@ import { QuotaMeter } from '../../components/QuotaMeter';
 import { QuotaResetLabel } from '../../components/QuotaResetLabel';
 import { collectQuotaRowInstants, pickUrgentRowId } from '../../resetSchedule';
 import type { QuotaBodyProps } from '../../types';
+import { isClaudeQuotaReserveReached } from './quotaReserve';
 
 export function ClaudeQuotaBody({
   quota,
   classes,
   planItems,
   afterPlan,
+  reserveMarkers,
 }: QuotaBodyProps<ClaudeQuotaState>) {
   const { t, i18n } = useTranslation();
   const now = useNow();
@@ -177,6 +179,8 @@ export function ClaudeQuotaBody({
           );
 
           const soon = window.id === soonestRowId;
+          const reserve = reserveMarkers?.[window.id];
+          const reserveReached = isClaudeQuotaReserveReached(remaining, reserve);
 
           return (
             <div
@@ -187,13 +191,28 @@ export function ClaudeQuotaBody({
               <div className={classes.quotaRowHeader}>
                 <span className={classes.quotaModel}>{windowLabel}</span>
                 <div className={classes.quotaMeta}>
+                  {reserveReached && (
+                    <span className={classes.claudeExtraUsageStatus}>
+                      {t('claude_quota.reserve_reached')}
+                    </span>
+                  )}
                   <span className={classes.quotaPercent}>{percentLabel}</span>
                   {resetDisplay && (
                     <QuotaResetLabel display={resetDisplay} classes={classes} soon={soon} />
                   )}
                 </div>
               </div>
-              <QuotaMeter percent={remaining} classes={classes} index={index} />
+              <QuotaMeter
+                percent={remaining}
+                classes={classes}
+                index={index}
+                markerPercent={reserve}
+                markerLabel={
+                  reserve === undefined
+                    ? undefined
+                    : t('claude_quota.reserve_marker', { percent: reserve })
+                }
+              />
             </div>
           );
         })

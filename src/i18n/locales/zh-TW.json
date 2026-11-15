@@ -515,7 +515,21 @@
     "plan_max": "Max",
     "plan_max5": "Max 5x",
     "plan_max20": "Max 20x",
-    "plan_team": "Team"
+    "plan_team": "Team",
+    "reserve_label": "用量護欄",
+    "reserve_state_on": "已開啟",
+    "reserve_state_off": "未開啟",
+    "reserve_manage": "設定",
+    "reserve_manage_aria": "設定「{{name}}」的用量護欄",
+    "reserve_dialog_title": "用量護欄",
+    "reserve_intro": "當某個限額的剩餘額度降至下方百分比時，停止向此憑證路由請求；該限額重設後恢復路由。",
+    "reserve_placeholder": "關閉",
+    "reserve_invalid": "請輸入 0 到 99 之間的數字，或留空。",
+    "reserve_fable_hint": "僅對 Fable 請求生效。",
+    "reserve_scope_note": "留空或填 0 即關閉。用量約每 2 分鐘檢查一次，因此憑證可能短暫越過護欄。",
+    "reserve_saved": "已儲存「{{name}}」的用量護欄",
+    "reserve_marker": "護欄：剩餘 {{percent}}% 時暫停",
+    "reserve_reached": "已暫停"
   },
   "codex_quota": {
     "title": "Codex 配額",

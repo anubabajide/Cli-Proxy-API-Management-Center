@@ -530,7 +530,21 @@
     "plan_max": "Max",
     "plan_max5": "Max 5x",
     "plan_max20": "Max 20x",
-    "plan_team": "Team"
+    "plan_team": "Team",
+    "reserve_label": "Usage guardrail",
+    "reserve_state_on": "On",
+    "reserve_state_off": "Off",
+    "reserve_manage": "Configure",
+    "reserve_manage_aria": "Configure usage guardrail for \"{{name}}\"",
+    "reserve_dialog_title": "Usage guardrail",
+    "reserve_intro": "Stop routing requests to this credential when a limit's remaining quota falls to the percentage below. Routing resumes when that limit resets.",
+    "reserve_placeholder": "Off",
+    "reserve_invalid": "Enter a number from 0 to 99, or leave it blank.",
+    "reserve_fable_hint": "Applies to Fable requests only.",
+    "reserve_scope_note": "Leave a field blank or set it to 0 to turn it off. Usage is checked about every 2 minutes, so a credential can briefly pass its guardrail.",
+    "reserve_saved": "Saved usage guardrail for \"{{name}}\"",
+    "reserve_marker": "Guardrail: pauses at {{percent}}% remaining",
+    "reserve_reached": "Paused"
   },
   "codex_quota": {
     "title": "Codex Quota",

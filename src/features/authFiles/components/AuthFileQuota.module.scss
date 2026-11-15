@@ -177,7 +177,7 @@ button.quotaMessageAction {
   height: 6px;
   border-radius: $radius-full;
   background: color-mix(in srgb, var(--text-primary) 8%, transparent);
-  overflow: hidden;
+  position: relative;
 }
 
 .quotaBarFill {
@@ -372,4 +372,16 @@ button.quotaMessageAction {
   .quotaBarFill {
     transition: none;
   }
+}
+
+/* Usage guardrail: a tick where the credential pauses; it overhangs the 6px track. */
+.quotaBarMarker {
+  position: absolute;
+  top: -3px;
+  bottom: -3px;
+  width: 2px;
+  margin-left: -1px;
+  border-radius: 1px;
+  background: var(--text-primary);
+  box-shadow: 0 0 0 1px var(--bg-primary);
 }

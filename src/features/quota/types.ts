@@ -51,6 +51,8 @@ export interface QuotaClassMap {
   quotaBarFillHigh: string;
   quotaBarFillMedium: string;
   quotaBarFillLow: string;
+  // Configured usage guardrail tick on a meter.
+  quotaBarMarker: string;
 }
 
 export const QUOTA_CLASS_KEYS: readonly (keyof QuotaClassMap)[] = [
@@ -88,6 +90,7 @@ export const QUOTA_CLASS_KEYS: readonly (keyof QuotaClassMap)[] = [
   'quotaBarFillHigh',
   'quotaBarFillMedium',
   'quotaBarFillLow',
+  'quotaBarMarker',
 ];
 
 /** 宿主 CSS Module → 类型化契约。缺键即抛（fail-loud），`source` 用于报错定位。 */
@@ -110,4 +113,6 @@ export interface QuotaBodyProps<TState> {
   planItems?: ReactNode;
   /** Host-owned content placed right after the plan row, before usage rows. */
   afterPlan?: ReactNode;
+  /** Usage guardrails as remaining percentages, keyed by quota window id. */
+  reserveMarkers?: Record<string, number>;
 }

@@ -530,7 +530,21 @@
     "plan_max": "Max",
     "plan_max5": "Max 5x",
     "plan_max20": "Max 20x",
-    "plan_team": "Team"
+    "plan_team": "Team",
+    "reserve_label": "Giới hạn bảo vệ",
+    "reserve_state_on": "Bật",
+    "reserve_state_off": "Tắt",
+    "reserve_manage": "Cấu hình",
+    "reserve_manage_aria": "Cấu hình giới hạn bảo vệ cho \"{{name}}\"",
+    "reserve_dialog_title": "Giới hạn bảo vệ",
+    "reserve_intro": "Ngừng định tuyến yêu cầu tới thông tin xác thực này khi hạn mức còn lại của một giới hạn giảm xuống tỷ lệ phần trăm bên dưới. Việc định tuyến tiếp tục khi giới hạn đó được đặt lại.",
+    "reserve_placeholder": "Tắt",
+    "reserve_invalid": "Nhập số từ 0 đến 99 hoặc để trống.",
+    "reserve_fable_hint": "Chỉ áp dụng cho yêu cầu Fable.",
+    "reserve_scope_note": "Để trống hoặc đặt 0 để tắt. Mức sử dụng được kiểm tra khoảng 2 phút một lần nên thông tin xác thực có thể vượt giới hạn trong thời gian ngắn.",
+    "reserve_saved": "Đã lưu giới hạn bảo vệ cho \"{{name}}\"",
+    "reserve_marker": "Giới hạn: tạm dừng khi còn {{percent}}%",
+    "reserve_reached": "Đã tạm dừng"
   },
   "codex_quota": {
     "title": "Quota Codex",
